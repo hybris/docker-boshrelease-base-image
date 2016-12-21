@@ -1,0 +1,26 @@
+jobs:
+- name: build-task-image
+  public: false
+  serial: true
+  plan:
+  - get: docker-boshrelease
+    trigger: false
+  - put: docker-image
+    params:
+      build: docker-boshrelease/ci/ci_image
+
+resources:
+- name: docker-boshrelease
+  type: git
+  source:
+    uri: {{pipeline-git-repo}}
+    branch: {{pipeline-branch}}
+    paths: [ci/ci_image/*]
+
+- name: docker-image
+  type: docker-image
+  source:
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-password}}
+    repository: {{docker-create-hub-task-image}}
