@@ -1,7 +1,7 @@
 FROM alpine
 
-# Install Bash:
-RUN apk --no-cache add bash
+# Install required tools:
+RUN apk --no-cache add bash git
 
 # Install Ruby and BOSH gem:
 RUN apk --no-cache add ruby \
