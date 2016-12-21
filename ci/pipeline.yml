@@ -3,14 +3,14 @@ jobs:
   public: false
   serial: true
   plan:
-  - get: docker-boshrelease
+  - get: docker-boshrelease-base-image
     trigger: false
   - put: docker-image
     params:
-      build: docker-boshrelease/ci/ci_image
+      build: docker-boshrelease-base-image/ci/ci_image
 
 resources:
-- name: docker-boshrelease
+- name: docker-boshrelease-base-image
   type: git
   source:
     uri: {{pipeline-git-repo}}
